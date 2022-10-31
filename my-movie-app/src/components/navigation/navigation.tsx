@@ -27,12 +27,12 @@ export const Navigation = () => {
 
   return (
     <StyledBoxWrapper>
-      <StyledOption className="selected" isActive={isPopularMovie} to="/">
+      <StyledOption className="selected" isactive={isPopularMovie} to="/">
         <StyledTitle onClick={() => handleRouteChange("/")} className="title">
           Popular Movies
         </StyledTitle>
       </StyledOption>
-      <StyledOption className="selected" isActive={isLikedRoute} to="/liked">
+      <StyledOption className="selected" isactive={isLikedRoute} to="/liked">
         <StyledTitle
           onClick={() => handleRouteChange("/liked")}
           className="title">
@@ -57,13 +57,13 @@ const StyledBoxWrapper = styled(Box)`
   margin: 0 auto;
   text-align: center;
 `;
-const StyledOption = styled(Link)<{ isActive?: boolean }>`
+const StyledOption = styled(Link)<{ isactive?: boolean }>`
   text-decoration: none;
   color: #052440;
   font-size: 18px;
   border-radius: 20px;
   ${(props) =>
-    props.isActive &&
+    props.isactive &&
     `
     background-color: #1b6ab3;
     .title {

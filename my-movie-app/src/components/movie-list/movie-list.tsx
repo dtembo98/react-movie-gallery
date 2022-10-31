@@ -8,13 +8,14 @@ import { IMovie } from "../../types/movie.type";
 
 interface MovieListProps {
   movies: IMovie[];
+  title?: string;
 }
 
 export const MovieList = (props: MovieListProps) => {
-  const { movies } = props;
+  const { movies, title } = props;
   return (
     <StyledMovieCollectionWrapper>
-      <StyledTitle>Popular Movies</StyledTitle>
+      <StyledTitle>{title}</StyledTitle>
       <StyledMovieCollection>
         {movies.map((movieItem) => (
           <MovieCard key={movieItem.id} movie={movieItem} />

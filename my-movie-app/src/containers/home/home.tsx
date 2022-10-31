@@ -1,21 +1,32 @@
 import React from "react";
 
 import { Banner, MovieList, Navigation } from "../../components";
+
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
 import {
   useFavouriteMoviesContext,
   usePopularMoviesContext,
 } from "../../context";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSearchMoviesContext } from "../../context/search-movies/search-movies.context";
+import { useGetNetworkStatus } from "../../hooks";
 
 export const Home = () => {
+  const isOnline = useGetNetworkStatus();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!isOnline) {
+      navigate("/no-connection");
+      alert("You are offline");
+    }
+  }, [isOnline]);
+
   const location = useLocation();
   const { isLoading, error, popularMovies } = usePopularMoviesContext();
   const { favouriteMovies } = useFavouriteMoviesContext();
   const { handleSearch, searchedMovies } = useSearchMoviesContext();
-  console.log("searchedMovies", searchedMovies);
 
   const handleSearchInputchange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -36,7 +47,12 @@ export const Home = () => {
         handleSearchInputchange={handleSearchInputchange}
       />
       <Navigation />
-      <MovieList movies={movies} />
+      <MovieList
+        title={
+          location.pathname === "/liked" ? "Liked Movies" : "Popular Movies"
+        }
+        movies={movies}
+      />
     </StyledHome>
   );
 };
