@@ -8,6 +8,7 @@ Movie Gallery is a simple React app that fetches popular movies from  [the movie
 ### Installation
 To start the project, follow the steps below
 
-1. cd  into the folder```react-movie-gallery/my-movie-app```
+1. clone the repository  ```git clonehttps://github.com/dtembo98/react-movie-gallery.git ```
+2. cd  into the folder```react-movie-gallery/my-movie-app```
 2. Run the command ```yarn start```
 
