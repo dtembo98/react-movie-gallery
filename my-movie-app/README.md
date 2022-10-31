@@ -10,6 +10,6 @@ To start the project, follow the steps below
 
 1. clone the repository  ```git clone https://github.com/dtembo98/react-movie-gallery.git ```
 2. cd  into the folder ```react-movie-gallery/my-movie-app```
-3. install package modules, run the command ```yarn install```
+3. install modules, run the command ```yarn install```
 4. Run the command ```yarn start```
 
