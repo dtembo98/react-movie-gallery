@@ -4,3 +4,10 @@ Movie Gallery is a simple React app that fetches popular movies from  [the movie
  - A User can like and unlike a movie
  - A User can easily navigate to liked movies
  - A User can search for a movie
+
+### Installation
+To start the project, follow the steps below
+
+1. cd  into the folder```react-movie-gallery/my-movie-app```
+2. Run the command ```yarn start```
+
