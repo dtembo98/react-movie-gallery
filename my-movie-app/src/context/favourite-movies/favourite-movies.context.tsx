@@ -64,6 +64,7 @@ export const FavouriteMoviesProvider = (
 
   const clearAllMovies = async () => {
     try {
+      console.log("clearing all movies");
       const jsonValue = JSON.stringify([]);
       await localStorage.setItem("@favourutes", jsonValue);
       setFavouritesMovies([]);
