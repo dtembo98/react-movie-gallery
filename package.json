@@ -2,7 +2,7 @@
   "name": "my-movie-app",
   "version": "0.1.0",
   "engine": {
-    "node": "v16.13.0"
+    "node": "16.13.0"
   },
   "private": true,
   "dependencies": {

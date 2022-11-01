@@ -17,11 +17,13 @@ export const NoInternet = () => {
 
   return (
     <StyledNoInternet>
-      <StyledImage src={"../../assets/icons8-disconnected-100.png"} />
+      <StyledImage src={require("../../assets/icons8-disconnected-100.png")} />
       <StyledMessage>
         Check your internet connection and try again.
       </StyledMessage>
-      <StyledButton onClick={handleReloadClick}>Reload page</StyledButton>
+      <StyledButton variant="outlined" onClick={handleReloadClick}>
+        Reload page
+      </StyledButton>
     </StyledNoInternet>
   );
 };
@@ -37,7 +39,6 @@ const StyledNoInternet = styled(Box)`
 const StyledImage = styled("img")`
   width: 100px;
   margin-bottom: 10px;
-  height: 300px;
 `;
 
 const StyledMessage = styled("p")`

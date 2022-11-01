@@ -8,7 +8,7 @@ import {
   useFavouriteMoviesContext,
   usePopularMoviesContext,
 } from "../../context";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSearchMoviesContext } from "../../context/search-movies/search-movies.context";
 import { useGetNetworkStatus } from "../../hooks";
 
