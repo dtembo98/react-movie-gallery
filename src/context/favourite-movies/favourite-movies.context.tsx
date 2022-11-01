@@ -34,16 +34,16 @@ export const FavouriteMoviesProvider = (
   const [error, setError] = useState("");
 
   useEffect(() => {
+    setIsloading(true);
     loadFavouriteMovies();
+    setIsloading(false);
   }, []);
 
   const saveFavouriteMovie = async (movies: IMovie[]) => {
     try {
       const jsonValue = JSON.stringify(movies);
       await localStorage.setItem("@favourites", jsonValue);
-    } catch (error) {
-      console.log("error setting item");
-    }
+    } catch (error) {}
   };
 
   const loadFavouriteMovies = async () => {
@@ -52,20 +52,15 @@ export const FavouriteMoviesProvider = (
       if (value !== null) {
         setFavouritesMovies(JSON.parse(value));
       }
-    } catch (err) {
-      console.log("error loading ", err);
-    }
+    } catch (err) {}
   };
 
   const clearAllMovies = async () => {
     try {
-      console.log("clearing all movies");
       const jsonValue = JSON.stringify([]);
       await localStorage.setItem("@favourites", jsonValue);
       setFavouritesMovies([]);
-    } catch (error) {
-      console.log("error setting item");
-    }
+    } catch (error) {}
   };
 
   const addFavouriteMovie = (movie: IMovie) => {

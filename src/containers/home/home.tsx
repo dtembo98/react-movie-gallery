@@ -10,15 +10,17 @@ import {
 } from "../../context";
 import { useLocation } from "react-router-dom";
 import { useSearchMoviesContext } from "../../context/search-movies/search-movies.context";
-import { useGetNetworkStatus } from "../../hooks";
+import { useGetNetworkStatus, useGetScreenSize } from "../../hooks";
 
 export const Home = () => {
-  const isOnline = useGetNetworkStatus();
-
+  const { isLarge, isMedium } = useGetScreenSize();
   const location = useLocation();
   const { isLoading, error, popularMovies } = usePopularMoviesContext();
   const { favouriteMovies } = useFavouriteMoviesContext();
   const { handleSearch, searchedMovies } = useSearchMoviesContext();
+
+  const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
+  const isOnline = useGetNetworkStatus();
 
   const handleSearchInputchange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -33,7 +35,7 @@ export const Home = () => {
       ? favouriteMovies
       : popularMovies;
   return (
-    <StyledHome>
+    <StyledHome device={deviceType}>
       <Banner
         movie={popularMovies[0]}
         handleSearchInputchange={handleSearchInputchange}
@@ -49,7 +51,18 @@ export const Home = () => {
   );
 };
 
-const StyledHome = styled(Box)`
-  width: 90%;
-  margin: 0 auto;
+const StyledHome = styled(Box)<{ device: "lg" | "md" | "sm" }>`
+  ${(props) =>
+    props.device === "lg" &&
+    ` 
+    width: 90%;
+    margin: 0 auto;
+  `};
+
+  ${(props) =>
+    props.device === "sm" &&
+    ` 
+    width: 100%;
+    margin: 0 auto;
+  `};
 `;

@@ -5,6 +5,7 @@ import { Box, Typography } from "@material-ui/core";
 
 import { MovieCard } from "../movie-card/movie-card";
 import { IMovie } from "../../types/movie.type";
+import { useGetScreenSize } from "../../hooks";
 
 interface MovieListProps {
   movies: IMovie[];
@@ -12,11 +13,14 @@ interface MovieListProps {
 }
 
 export const MovieList = (props: MovieListProps) => {
+  const { isLarge, isMedium } = useGetScreenSize();
+  const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
+
   const { movies, title } = props;
   return (
     <StyledMovieCollectionWrapper>
       <StyledTitle>{title}</StyledTitle>
-      <StyledMovieCollection>
+      <StyledMovieCollection device={deviceType}>
         {movies.map((movieItem) => (
           <MovieCard key={movieItem.id} movie={movieItem} />
         ))}
@@ -30,29 +34,43 @@ const StyledMovieCollectionWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  align-items: center;
 `;
 
-const StyledMovieCollection = styled(Box)`
-  width: 100%;
-  border-radius: 10px;
-  display: flex;
-  /* flex-direction: row;
-  align-items: stretch; */
+const StyledMovieCollection = styled(Box)<{ device: "sm" | "md" | "lg" }>`
+  ${(props) =>
+    props.device === "lg" &&
+    `width: 100%;
+     border-radius: 10px;
+     display: flex;
+     gap: 15px;
+     flex-wrap: wrap;
+  `};
 
-  gap: 15px;
-  /* padding-top: 15px;
-  padding-left: 50px;
-  overflow-x: scroll;
-  overflow-y: hidden; */
-  flex-wrap: wrap;
+  ${(props) =>
+    props.device === "md" &&
+    `display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     gap: 10px;
+     align-items: center;
+     justify-content: center;
+  `};
+
+  ${(props) =>
+    props.device === "sm" &&
+    ` 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 10px;
+    align-items: center;
+    justify-items: center;
+  `};
 `;
 
 const StyledTitle = styled(Typography)`
   font-size: 24px;
   color: black;
-  padding-left: 50px;
+  align-self: flex-start;
+  margin-left: 25px;
 `;
-
-// Small (smaller than 640px)
-// Medium (641px to 1007px)
-// Large (1008px and larger)

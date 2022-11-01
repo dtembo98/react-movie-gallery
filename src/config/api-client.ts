@@ -1,8 +1,6 @@
 import axios from "axios";
 import { API_KEY, BASE_URL } from "../utils/constants";
 
-const baseURL = "https://api.themoviedb.org/3/movie/";
-
 const getClient = (baseUrl: string) => {
   const options = {
     baseURL: baseUrl,

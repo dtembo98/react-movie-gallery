@@ -1,6 +1,7 @@
 import { BASE_IMAGE_URL, IMAGE_NOT_FOUND, IMAGE_SIZE } from "./constants";
 
 type IMAGE_SIZE_TYPE = keyof typeof IMAGE_SIZE;
+
 export const imageExtractor = (
   size: IMAGE_SIZE_TYPE,
   path: string | null
