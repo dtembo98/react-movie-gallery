@@ -1,6 +1,9 @@
 {
   "name": "my-movie-app",
   "version": "0.1.0",
+  "engine": {
+    "node": "v16.13.0"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -21,16 +24,19 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "serve": "^14.0.1",
     "styled-components": "^5.3.6",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
+    "dev":"react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+    },
   "eslintConfig": {
     "extends": [
       "react-app",

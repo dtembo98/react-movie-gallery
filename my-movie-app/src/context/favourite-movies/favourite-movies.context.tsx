@@ -1,6 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
 
-import { useGetPopularMovies } from "../../hooks";
 import { IMovie } from "../../types/movie.type";
 
 type FavouriteMoviesContextType = {
@@ -30,7 +29,6 @@ type FavouriteMoviesProviderProps = {
 export const FavouriteMoviesProvider = (
   props: FavouriteMoviesProviderProps
 ) => {
-  const {} = useGetPopularMovies();
   const [favouriteMovies, setFavouritesMovies] = useState<IMovie[]>([]);
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState("");
@@ -38,14 +36,11 @@ export const FavouriteMoviesProvider = (
   useEffect(() => {
     loadFavouriteMovies();
   }, []);
-  useEffect(() => {
-    saveFavouriteMovie(favouriteMovies);
-  }, [favouriteMovies]);
 
   const saveFavouriteMovie = async (movies: IMovie[]) => {
     try {
       const jsonValue = JSON.stringify(movies);
-      await localStorage.setItem("@favourutes", jsonValue);
+      await localStorage.setItem("@favourites", jsonValue);
     } catch (error) {
       console.log("error setting item");
     }
@@ -53,7 +48,7 @@ export const FavouriteMoviesProvider = (
 
   const loadFavouriteMovies = async () => {
     try {
-      const value = await localStorage.getItem("@favourutes");
+      const value = await localStorage.getItem("@favourites");
       if (value !== null) {
         setFavouritesMovies(JSON.parse(value));
       }
@@ -66,7 +61,7 @@ export const FavouriteMoviesProvider = (
     try {
       console.log("clearing all movies");
       const jsonValue = JSON.stringify([]);
-      await localStorage.setItem("@favourutes", jsonValue);
+      await localStorage.setItem("@favourites", jsonValue);
       setFavouritesMovies([]);
     } catch (error) {
       console.log("error setting item");
@@ -76,6 +71,9 @@ export const FavouriteMoviesProvider = (
   const addFavouriteMovie = (movie: IMovie) => {
     console.log("addFavouriteMovie", movie);
     setFavouritesMovies([...favouriteMovies, movie]);
+
+    let faveMovies = [...favouriteMovies, movie];
+    saveFavouriteMovie(faveMovies);
   };
 
   const removeFavouriteMovie = (movie: IMovie) => {

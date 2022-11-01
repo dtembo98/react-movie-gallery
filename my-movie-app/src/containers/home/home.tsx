@@ -14,14 +14,6 @@ import { useGetNetworkStatus } from "../../hooks";
 
 export const Home = () => {
   const isOnline = useGetNetworkStatus();
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!isOnline) {
-      navigate("/no-connection");
-      alert("You are offline");
-    }
-  }, [isOnline]);
 
   const location = useLocation();
   const { isLoading, error, popularMovies } = usePopularMoviesContext();
