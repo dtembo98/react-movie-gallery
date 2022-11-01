@@ -2,28 +2,13 @@ import * as react from "react";
 
 import { Box, Typography } from "@material-ui/core";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import { Link, useLocation } from "react-router-dom";
+import { useGetActiveRoute } from "../../hooks";
 
 export const Navigation = () => {
-  const location = useLocation();
-  const [isLikedRoute, setLikedRoute] = react.useState<boolean>(
-    location.pathname === "/liked"
-  );
-  const [isPopularMovie, setPopularMovie] = react.useState<boolean>(
-    location.pathname === "/"
-  );
-
-  const handleRouteChange = (route: string) => {
-    if (route === "/") {
-      setPopularMovie(true);
-      setLikedRoute(false);
-    }
-    if (route === "/liked") {
-      setLikedRoute(true);
-      setPopularMovie(false);
-    }
-  };
+  const { isLikedRoute, isPopularMovie, handleRouteChange } =
+    useGetActiveRoute();
 
   return (
     <StyledBoxWrapper>
