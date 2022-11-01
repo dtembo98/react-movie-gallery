@@ -31,6 +31,7 @@ export const Banner = (props: BannerProps) => {
         </StyledTitle>
       </StyledBannerContent>
       <StyledSearchBar
+        device={deviceType}
         onChange={handleSearchInputchange}
         placeholder="Search movie ..."
       />
@@ -118,18 +119,58 @@ const StyledTitle = styled(Typography)`
   padding-right: 15px;
 `;
 
-const StyledSearchBar = styled("input")`
-  padding: 10px;
-  width: 95%;
-  display: flex;
-  border: none;
-  border-radius: 30px;
-  align-items: center;
-  outline: none;
-  color: #b8b6b6;
-  font-size: 18px;
-  justify-content: center;
-  padding-left: 15px;
-  padding-right: 15px;
-  align-self: center;
+const StyledSearchBar = styled("input")<{
+  device: "lg" | "md" | "sm";
+}>`
+  ${(props) =>
+    props.device === "lg" &&
+    `
+    padding: 10px;
+    width: 90%;
+    display: flex;
+    border: none;
+    border-radius: 30px;
+    align-items: center;
+    outline: none;
+    color: #b8b6b6;
+    font-size: 18px;
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+   
+  `};
+  ${(props) =>
+    props.device === "md" &&
+    `
+    padding: 10px;
+    width: 90%;
+    display: flex;
+    border: none;
+    border-radius: 30px;
+    align-items: center;
+    outline: none;
+    color: #b8b6b6;
+    font-size: 18px;
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-self: center;
+  `};
+  ${(props) =>
+    props.device === "sm" &&
+    `
+    padding: 10px;
+    width: 95%;
+    display: flex;
+    border: none;
+    border-radius: 30px;
+    align-items: center;
+    outline: none;
+    color: #b8b6b6;
+    font-size: 18px;
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-self: center;
+  `};
 `;

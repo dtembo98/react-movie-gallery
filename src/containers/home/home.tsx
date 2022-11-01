@@ -60,6 +60,12 @@ const StyledHome = styled(Box)<{ device: "lg" | "md" | "sm" }>`
   `};
 
   ${(props) =>
+    props.device === "md" &&
+    ` 
+    width: 90%;
+    margin: 0 auto;
+  `};
+  ${(props) =>
     props.device === "sm" &&
     ` 
     width: 100%;
