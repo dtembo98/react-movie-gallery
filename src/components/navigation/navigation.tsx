@@ -1,4 +1,4 @@
-import * as react from "react";
+import * as React from "react";
 
 import { Box, Typography } from "@material-ui/core";
 import styled from "styled-components";
@@ -11,6 +11,8 @@ export const Navigation = () => {
     useGetActiveRoute();
   const { isLarge, isMedium } = useGetScreenSize();
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
+
+  console.log("Is Liked ", isLikedRoute, " Is Popular ", isPopularMovie);
 
   return (
     <StyledBoxWrapper device={deviceType}>
@@ -45,6 +47,7 @@ const StyledBoxWrapper = styled(Box)<{ device: "lg" | "md" | "sm" }>`
     height: 50px;
     margin: 0 auto;
     text-align: center
+
   `};
 
   ${(props) =>
@@ -62,6 +65,7 @@ const StyledBoxWrapper = styled(Box)<{ device: "lg" | "md" | "sm" }>`
     height: 50px;
     margin: 0 auto;
     text-align: center
+    
   `};
 
   ${(props) =>
@@ -78,21 +82,22 @@ const StyledBoxWrapper = styled(Box)<{ device: "lg" | "md" | "sm" }>`
     height: 50px;
     margin: 0 auto;
     text-align: center;
+ 
    
   `};
 `;
 const StyledOption = styled(Link)<{ isactive?: boolean }>`
   text-decoration: none;
-  color: #052440;
+  color: ${({ theme }) => theme.palette.primary.dark};
   font-size: 18px;
   border-radius: 20px;
-  border: 1px solid #1b6ab3;
-  ${(props) =>
-    props.isactive &&
+  border: 1px solid ${({ theme }) => theme.palette.primary.main};
+  ${({ isactive, theme }) =>
+    isactive &&
     `
-    background-color: #1b6ab3;
+    background-color: ${theme.palette.primary.main};
     .title {
-      color: #fff;
+      color: ${theme.palette.neutral.white};
     }
   `};
 
@@ -101,7 +106,7 @@ const StyledOption = styled(Link)<{ isactive?: boolean }>`
 `;
 
 const StyledTitle = styled(Typography)`
-  color: black;
+  color: ${({ theme }) => theme.palette.neutral.black};
   font-size: 16px;
   font-weight: 400;
   word-wrap: break-word;

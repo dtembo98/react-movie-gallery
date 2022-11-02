@@ -1,4 +1,4 @@
-import * as react from "react";
+import * as React from "react";
 
 import { Box, Typography } from "@material-ui/core";
 import styled from "styled-components";
@@ -122,8 +122,8 @@ const StyledTitle = styled(Typography)`
 const StyledSearchBar = styled("input")<{
   device: "lg" | "md" | "sm";
 }>`
-  ${(props) =>
-    props.device === "lg" &&
+  ${({ device, theme }) =>
+    device === "lg" &&
     `
     padding: 10px;
     width: 90%;
@@ -132,15 +132,15 @@ const StyledSearchBar = styled("input")<{
     border-radius: 30px;
     align-items: center;
     outline: none;
-    color: #b8b6b6;
+    color:${theme.palette.neutral.grey};
     font-size: 18px;
     justify-content: center;
     padding-left: 15px;
     padding-right: 15px;
    
   `};
-  ${(props) =>
-    props.device === "md" &&
+  ${({ device, theme }) =>
+    device === "md" &&
     `
     padding: 10px;
     width: 90%;
@@ -149,15 +149,16 @@ const StyledSearchBar = styled("input")<{
     border-radius: 30px;
     align-items: center;
     outline: none;
-    color: #b8b6b6;
+    color: ${theme.palette.neutral.grey};
     font-size: 18px;
     justify-content: center;
     padding-left: 15px;
     padding-right: 15px;
     align-self: center;
   `};
-  ${(props) =>
-    props.device === "sm" &&
+
+  ${({ device, theme }) =>
+    device === "sm" &&
     `
     padding: 10px;
     width: 95%;
@@ -166,7 +167,7 @@ const StyledSearchBar = styled("input")<{
     border-radius: 30px;
     align-items: center;
     outline: none;
-    color: #b8b6b6;
+    color: ${theme.palette.neutral.grey};
     font-size: 18px;
     justify-content: center;
     padding-left: 15px;

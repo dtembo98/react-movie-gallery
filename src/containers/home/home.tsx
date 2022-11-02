@@ -1,25 +1,28 @@
 import React from "react";
 
-import { Banner, MovieList, Navigation } from "../../components";
-
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
+
+import { Banner, MovieList, Navigation } from "../../components";
 import {
   useFavouriteMoviesContext,
   usePopularMoviesContext,
 } from "../../context";
-import { useLocation } from "react-router-dom";
+
 import { useSearchMoviesContext } from "../../context/search-movies/search-movies.context";
 import { useGetNetworkStatus, useGetScreenSize } from "../../hooks";
 
 export const Home = () => {
   const { isLarge, isMedium } = useGetScreenSize();
   const location = useLocation();
-  const { isLoading, error, popularMovies } = usePopularMoviesContext();
+  const { isLoading, popularMovies } = usePopularMoviesContext();
   const { favouriteMovies } = useFavouriteMoviesContext();
   const { handleSearch, searchedMovies } = useSearchMoviesContext();
 
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isOnline = useGetNetworkStatus();
 
   const handleSearchInputchange = (
@@ -27,7 +30,7 @@ export const Home = () => {
   ) => {
     handleSearch(event.target.value);
   };
-
+  if (isLoading) <StyledTitle>Loading </StyledTitle>;
   const movies =
     searchedMovies.length >= 1
       ? searchedMovies
@@ -71,4 +74,12 @@ const StyledHome = styled(Box)<{ device: "lg" | "md" | "sm" }>`
     width: 100%;
     margin: 0 auto;
   `};
+`;
+
+const StyledTitle = styled(Typography)`
+  font-size: 24px;
+  color: ${({ theme }) => theme.palette.neutral.black};
+  text-align: center;
+  margin-left: 25px;
+  margin-bottom: 10px;
 `;

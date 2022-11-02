@@ -31,7 +31,7 @@ export const FavouriteMoviesProvider = (
 ) => {
   const [favouriteMovies, setFavouritesMovies] = useState<IMovie[]>([]);
   const [isLoading, setIsloading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<any>();
 
   useEffect(() => {
     setIsloading(true);
@@ -43,7 +43,9 @@ export const FavouriteMoviesProvider = (
     try {
       const jsonValue = JSON.stringify(movies);
       await localStorage.setItem("@favourites", jsonValue);
-    } catch (error) {}
+    } catch (error) {
+      setError(error);
+    }
   };
 
   const loadFavouriteMovies = async () => {
@@ -52,7 +54,9 @@ export const FavouriteMoviesProvider = (
       if (value !== null) {
         setFavouritesMovies(JSON.parse(value));
       }
-    } catch (err) {}
+    } catch (err) {
+      setError(error);
+    }
   };
 
   const clearAllMovies = async () => {
@@ -60,21 +64,21 @@ export const FavouriteMoviesProvider = (
       const jsonValue = JSON.stringify([]);
       await localStorage.setItem("@favourites", jsonValue);
       setFavouritesMovies([]);
-    } catch (error) {}
+    } catch (error) {
+      setError(error);
+    }
   };
 
   const addFavouriteMovie = (movie: IMovie) => {
-    console.log("addFavouriteMovie", movie);
     setFavouritesMovies([...favouriteMovies, movie]);
-
     let faveMovies = [...favouriteMovies, movie];
     saveFavouriteMovie(faveMovies);
   };
 
   const removeFavouriteMovie = (movie: IMovie) => {
     const newFavouriteMovies = favouriteMovies.filter((m) => m.id !== movie.id);
-
     setFavouritesMovies(newFavouriteMovies);
+    saveFavouriteMovie(newFavouriteMovies);
   };
 
   return (

@@ -1,13 +1,13 @@
 import * as React from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-
-import { ThemeProvider } from "@mui/system";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
 import { Home, NoInternet, ErrorBoundary } from "./containers";
-import "./App.css";
 import { customTheme } from "./theme/palette";
 import { FavouriteMoviesProvider, PopularMoviesProvider } from "./context";
 import { SearchMoviesProvider } from "./context/search-movies/search-movies.context";
+
+import "./App.css";
 
 function App() {
   return (
