@@ -31,60 +31,20 @@ export const Navigation = () => {
 };
 
 const StyledBoxWrapper = styled(Box)<{ device: "lg" | "md" | "sm" }>`
-  ${(props) =>
-    props.device === "lg" &&
-    `
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    border-radius: 25px;
-    width: 50%;
-    margin-bottom: 40px;
-    padding: 10px;
-    height: 50px;
-    margin: 0 auto;
-    text-align: center
-
-  `};
-
-  ${(props) =>
-    props.device === "md" &&
-    `
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
- 
-    border-radius: 25px;
-    width: 50%;
-    margin-bottom: 40px;
-    padding: 10px;
-    height: 50px;
-    margin: 0 auto;
-    text-align: center
-    
-  `};
-
-  ${(props) =>
-    props.device === "sm" &&
-    `
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    border-radius: 25px;
-    width: 50%;
-    margin-bottom: 40px;
-    padding: 5px;
-    height: 50px;
-    margin: 0 auto;
-    text-align: center;
- 
-   
-  `};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: ${({ device }) => (device === "sm" ? "5px" : "50px")};
+  border-radius: 25px;
+  width: ${({ device }) => (device === "sm" ? "45%" : "50%")};
+  margin-bottom: 40px;
+  padding: ${({ device }) => (device === "sm" ? "5px" : "10px")};
+  height: 50px;
+  margin: 0 auto;
 `;
 const StyledOption = styled(Link)<{ isactive?: boolean }>`
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   color: ${({ theme }) => theme.palette.primary.dark};
   font-size: 18px;
@@ -107,6 +67,4 @@ const StyledTitle = styled(Typography)`
   color: ${({ theme }) => theme.palette.neutral.black};
   font-size: 16px;
   font-weight: 400;
-  word-wrap: break-word;
-  width: 11em;
 `;
