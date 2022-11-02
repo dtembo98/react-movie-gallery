@@ -12,8 +12,6 @@ export const Navigation = () => {
   const { isLarge, isMedium } = useGetScreenSize();
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
 
-  console.log("Is Liked ", isLikedRoute, " Is Popular ", isPopularMovie);
-
   return (
     <StyledBoxWrapper device={deviceType}>
       <StyledOption className="selected" isactive={isPopularMovie} to="/">

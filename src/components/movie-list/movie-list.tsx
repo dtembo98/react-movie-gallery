@@ -40,6 +40,7 @@ const StyledMovieCollectionWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
 `;
 
 const StyledMovieCollection = styled(Box)<{

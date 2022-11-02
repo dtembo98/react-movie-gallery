@@ -9,7 +9,6 @@ export const useGetNetworkStatus = (): boolean => {
     setNetwork(window.navigator.onLine);
   };
   useEffect(() => {
-    console.log("useGetNetworkStatus: useEffect");
     window.addEventListener("offline", updateNetwork);
     window.addEventListener("online", updateNetwork);
     return () => {
@@ -21,10 +20,8 @@ export const useGetNetworkStatus = (): boolean => {
   useEffect(() => {
     if (isOnline) {
       navigate("/");
-      console.log("useGetNetworkStatus: useEffect: isOnline");
     }
     if (!isOnline) {
-      console.log("testing");
       navigate("/no-connection");
     }
   }, [isOnline]);

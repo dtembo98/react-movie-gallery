@@ -8,9 +8,7 @@ export const NoInternet = () => {
   const isOnline = useGetNetworkStatus();
 
   const handleReloadClick = () => {
-    console.log("reload");
     if (!isOnline) {
-      console.log("clicked");
       navigate("/");
     }
   };
