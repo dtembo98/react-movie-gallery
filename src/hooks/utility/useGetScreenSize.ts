@@ -12,11 +12,11 @@ export const useGetScreenSize = () => {
     window.addEventListener("resize", () => {
       setScreenSize(window.innerWidth);
     });
-    return () => {
-      window.removeEventListener("resize", () => {
-        setScreenSize(window.innerWidth);
-      });
-    };
+    // return () => {
+    //   window.removeEventListener("resize", () => {
+    //     setScreenSize(window.innerWidth);
+    //   });
+    // };
   }, []);
 
   useEffect(() => {
@@ -24,14 +24,17 @@ export const useGetScreenSize = () => {
       setSmall(true);
       setMedium(false);
       setLarge(false);
+      console.log("small");
     } else if (screenSize >= 640 && screenSize <= 1007) {
       setSmall(false);
       setMedium(true);
       setLarge(false);
+      console.log("medium");
     } else {
       setSmall(false);
       setMedium(false);
       setLarge(true);
+      console.log("large");
     }
   }, [screenSize]);
 

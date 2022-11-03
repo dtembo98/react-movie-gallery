@@ -46,7 +46,7 @@ const StyledBanner = styled(Box)<{
   ${({ device, img_url }) =>
     device === "lg" &&
     `
-     height: 400px;
+  height: 400px;
   margin-bottom: 24px;
   background: linear-gradient(
       to right,

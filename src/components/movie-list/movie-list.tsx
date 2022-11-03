@@ -7,6 +7,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { IMovie } from "../../types/movie.type";
 import { useGetScreenSize } from "../../hooks";
 import { usePopularMoviesContext } from "../../context";
+import { useSearchMoviesContext } from "../../context/search-movies/search-movies.context";
 
 interface MovieListProps {
   movies: IMovie[];
@@ -22,6 +23,7 @@ const DEVICE_SIZES = {
 export const MovieList = (props: MovieListProps) => {
   const { isMedium, isSmall } = useGetScreenSize();
   const { setPage, page } = usePopularMoviesContext();
+  const { searchedMovies } = useSearchMoviesContext();
   const deviceType = isSmall ? "sm" : isMedium ? "md" : "lg";
 
   const handleLoadMoreClick = () => {
@@ -37,6 +39,7 @@ export const MovieList = (props: MovieListProps) => {
         ))}
       </StyledMovieCollection>
       {movies.length === 0 && <StyledTitle>No movies found</StyledTitle>}
+
       {movies.length >= 1 && (
         <StyledButton variant="outlined" onClick={handleLoadMoreClick}>
           Load More

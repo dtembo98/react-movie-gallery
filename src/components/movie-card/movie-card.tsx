@@ -37,7 +37,7 @@ export const MovieCard = (props: MovieCardProps) => {
 
   return (
     <StyledMovieCard onClick={handleClick}>
-      <StyledImage src={posterImageUrl} />
+      <StyledImage loading="lazy" src={posterImageUrl} />
       <StyledBoxWrapper>
         <StyledTitle className="MovieCard-title__p">{movie.title}</StyledTitle>
         <StyledIcon isfavourite={isFavouriteMovie} />

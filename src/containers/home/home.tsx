@@ -4,7 +4,13 @@ import { Box, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
-import { Banner, MovieList, Navigation } from "../../components";
+import {
+  BannerMedium,
+  MovieList,
+  Navigation,
+  BannerSmall,
+  BannerLarge,
+} from "../../components";
 import {
   useFavouriteMoviesContext,
   usePopularMoviesContext,
@@ -21,7 +27,7 @@ export const Home = () => {
   const { handleSearch, searchedMovies } = useSearchMoviesContext();
 
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
-  console.log("device ", deviceType);
+  console.log("device in home", deviceType);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isOnline = useGetNetworkStatus();
@@ -37,10 +43,25 @@ export const Home = () => {
 
   return (
     <StyledHome device={deviceType}>
-      <Banner
-        movie={popularMovies[0]}
-        handleSearchInputchange={handleSearchInputchange}
-      />
+      {deviceType === "lg" && (
+        <BannerLarge
+          movie={popularMovies[0]}
+          handleSearchInputchange={handleSearchInputchange}
+        />
+      )}
+      {deviceType === "md" && (
+        <BannerMedium
+          movie={popularMovies[0]}
+          handleSearchInputchange={handleSearchInputchange}
+        />
+      )}
+      {deviceType === "sm" && (
+        <BannerSmall
+          movie={popularMovies[0]}
+          handleSearchInputchange={handleSearchInputchange}
+        />
+      )}
+
       <Navigation />
       {searchedMovies.length >= 1 ? (
         <MovieList
