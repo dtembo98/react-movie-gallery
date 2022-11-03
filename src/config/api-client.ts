@@ -1,16 +1,18 @@
 import axios from "axios";
 import { API_KEY, BASE_URL } from "../utils/constants";
 
-const getClient = (baseUrl: string) => {
+export const getClient = (urlparams?: string) => {
   const options = {
-    baseURL: baseUrl,
+    baseURL: BASE_URL,
   };
 
   const client = axios.create(options);
 
   client.interceptors.request.use(
     (requestConfig) => {
-      requestConfig.url = `${requestConfig.url}?&api_key=${API_KEY}`;
+      requestConfig.url = `${requestConfig.url}?&api_key=${API_KEY}${
+        urlparams || ""
+      }`;
       return requestConfig;
     },
     (requestError) => {
@@ -20,5 +22,3 @@ const getClient = (baseUrl: string) => {
 
   return client;
 };
-
-export default getClient(BASE_URL);

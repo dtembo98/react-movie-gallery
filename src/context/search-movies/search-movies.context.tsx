@@ -23,6 +23,7 @@ type SearchedMoviesProviderProps = {
 
 export const SearchMoviesProvider = (props: SearchedMoviesProviderProps) => {
   const { searchMovie } = useSearchMovie();
+
   const [searchedMovies, setSearchedMovies] = useState<IMovie[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsloading] = useState(false);
@@ -44,7 +45,11 @@ export const SearchMoviesProvider = (props: SearchedMoviesProviderProps) => {
   };
 
   useEffect(() => {
-    retrieveSearchedMovies(searchTerm);
+    if (searchTerm === "") {
+      setSearchedMovies([]);
+    } else {
+      retrieveSearchedMovies(searchTerm);
+    }
   }, [searchTerm]);
 
   const handleSearch = (term: string) => {

@@ -1,11 +1,12 @@
 import * as React from "react";
 
-import { Box, Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import styled from "styled-components";
 
 import { MovieCard } from "../movie-card/movie-card";
 import { IMovie } from "../../types/movie.type";
 import { useGetScreenSize } from "../../hooks";
+import { usePopularMoviesContext } from "../../context";
 
 interface MovieListProps {
   movies: IMovie[];
@@ -20,7 +21,12 @@ const DEVICE_SIZES = {
 
 export const MovieList = (props: MovieListProps) => {
   const { isMedium, isSmall } = useGetScreenSize();
+  const { setPage, page } = usePopularMoviesContext();
   const deviceType = isSmall ? "sm" : isMedium ? "md" : "lg";
+
+  const handleLoadMoreClick = () => {
+    setPage(page + 1);
+  };
 
   const { movies } = props;
   return (
@@ -31,6 +37,11 @@ export const MovieList = (props: MovieListProps) => {
         ))}
       </StyledMovieCollection>
       {movies.length === 0 && <StyledTitle>No movies found</StyledTitle>}
+      {movies.length >= 1 && (
+        <StyledButton variant="outlined" onClick={handleLoadMoreClick}>
+          Load More
+        </StyledButton>
+      )}
     </StyledMovieCollectionWrapper>
   );
 };
@@ -53,6 +64,7 @@ const StyledMovieCollection = styled(Box)<{
   display: grid;
   grid-template-columns: repeat(${({ device }) => DEVICE_SIZES[device]}, 1fr);
   margin-bottom: 50px;
+  grid-gap: 20px;
 `;
 
 const StyledTitle = styled(Typography)`
@@ -61,4 +73,9 @@ const StyledTitle = styled(Typography)`
   text-align: center;
   margin-left: 25px;
   margin-bottom: 10px;
+`;
+
+const StyledButton = styled(Button)`
+  color: ${({ theme }) => theme.palette.primary.main};
+  background-color: ${({ theme }) => theme.palette.primary.main};
 `;

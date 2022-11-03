@@ -6,7 +6,7 @@ export const useGetScreenSize = () => {
   const [isSmall, setSmall] = useState(false);
   const [isMedium, setMedium] = useState(false);
   const [isLarge, setLarge] = useState(false);
-  const [screenSize, setScreenSize] = useState(0);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   useLayoutEffect(() => {
     window.addEventListener("resize", () => {

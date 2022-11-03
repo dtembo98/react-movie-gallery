@@ -5,10 +5,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { useGetActiveRoute, useGetScreenSize } from "../../hooks";
+import { useSearchMoviesContext } from "../../context/search-movies/search-movies.context";
 
 export const Navigation = () => {
   const { isLikedRoute, isPopularMovie, handleRouteChange } =
     useGetActiveRoute();
+  const { searchedMovies } = useSearchMoviesContext();
   const { isLarge, isMedium } = useGetScreenSize();
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
 
@@ -16,7 +18,9 @@ export const Navigation = () => {
     <StyledBoxWrapper device={deviceType}>
       <StyledOption className="selected" isactive={isPopularMovie} to="/">
         <StyledTitle onClick={() => handleRouteChange("/")} className="title">
-          Popular Movies
+          {searchedMovies && searchedMovies.length > 0
+            ? "Search Results"
+            : "Popular Movies"}
         </StyledTitle>
       </StyledOption>
       <StyledOption className="selected" isactive={isLikedRoute} to="/liked">
@@ -67,4 +71,6 @@ const StyledTitle = styled(Typography)`
   color: ${({ theme }) => theme.palette.neutral.black};
   font-size: 16px;
   font-weight: 400;
+  width: 11rem;
+  text-align: center;
 `;

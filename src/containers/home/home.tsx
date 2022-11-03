@@ -21,6 +21,7 @@ export const Home = () => {
   const { handleSearch, searchedMovies } = useSearchMoviesContext();
 
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
+  console.log("device ", deviceType);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isOnline = useGetNetworkStatus();
@@ -28,15 +29,12 @@ export const Home = () => {
   const handleSearchInputchange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    handleSearch(event.target.value);
+    handleSearch(event.target.value.trim());
   };
-  if (isLoading) <StyledTitle>Loading </StyledTitle>;
-  const movies =
-    searchedMovies.length >= 1
-      ? searchedMovies
-      : location.pathname === "/liked"
-      ? favouriteMovies
-      : popularMovies;
+  if (isLoading) {
+    return <StyledTitle>Loading ... </StyledTitle>;
+  }
+
   return (
     <StyledHome device={deviceType}>
       <Banner
@@ -44,12 +42,19 @@ export const Home = () => {
         handleSearchInputchange={handleSearchInputchange}
       />
       <Navigation />
-      <MovieList
-        title={
-          location.pathname === "/liked" ? "Liked Movies" : "Popular Movies"
-        }
-        movies={movies}
-      />
+      {searchedMovies.length >= 1 ? (
+        <MovieList
+          movies={
+            location.pathname === "/liked" ? favouriteMovies : searchedMovies
+          }
+        />
+      ) : (
+        <MovieList
+          movies={
+            location.pathname === "/liked" ? favouriteMovies : popularMovies
+          }
+        />
+      )}
     </StyledHome>
   );
 };
