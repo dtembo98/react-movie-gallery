@@ -27,7 +27,6 @@ export const Home = () => {
   const { handleSearch, searchedMovies } = useSearchMoviesContext();
 
   const deviceType = isLarge ? "lg" : isMedium ? "md" : "sm";
-  console.log("device in home", deviceType);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isOnline = useGetNetworkStatus();
